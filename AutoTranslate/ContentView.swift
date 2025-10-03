@@ -56,18 +56,32 @@ struct ContentView: View {
             VStack(spacing: 0) {
                 TextEditor(text: $input)
                     .font(.largeTitle)
-                Button("Create Translations", action: createAllTranslations)
+                Group {
+                    switch translationState {
+                    case .waiting:
+                        Button("Create Translations", action: createAllTranslations)
+                    case .creating:
+                        ProgressView()
+                    case .done:
+                        Text("Done")
+                    }
+                }
+                .frame(height: 60)
             }
         }
         .translationTask(configuration, action: translate)
         .onChange(of: input) {
-            configuration.invalidate()
+//            configuration.invalidate() // we don't want to translate to all langs whenever input changes
+            translationState = .waiting
         }
+        .onChange(of: languages, updateLanguages)
     }
     
     func translate(using session: TranslationSession) async {
         do {
-            if translationState == .creating {
+            if translationState == .waiting {
+                try await session.prepareTranslation() // download languages
+            } else {
                 let result = try await session.translate(input)
                 print("DEBUG: \(result.targetText)")
                 
@@ -99,6 +113,21 @@ struct ContentView: View {
         configuration.invalidate()
     }
     
+    /// Whenever we add new language. Set it as source and trigger invalidation just to let user download locale into their device not when button is tapped but when user selects a language
+    func updateLanguages(oldValue: [Language], newValue: [Language]) {
+        let oldSet = Set(oldValue.filter(\.isSelected))
+        let newSet = Set(newValue.filter(\.isSelected))
+        
+        let difference = newSet.subtracting(oldSet)
+        
+        // This method is called when new language is selected (oldSet-newSet should result in a single object)
+        if let newLanguage = difference.first {
+            configuration.source = Locale.Language(identifier: newLanguage.id)
+            configuration.invalidate()
+        }
+        
+        translationState = .waiting
+    }
 }
 
 #Preview {
