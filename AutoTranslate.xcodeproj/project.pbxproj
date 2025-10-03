@@ -10,9 +10,22 @@
 		24F482552E8FB7A0004383E2 /* AutoTranslate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoTranslate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		24F4826D2E900017004383E2 /* Exceptions for "AutoTranslate" folder in "AutoTranslate" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 24F482542E8FB7A0004383E2 /* AutoTranslate */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		24F482572E8FB7A0004383E2 /* AutoTranslate */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				24F4826D2E900017004383E2 /* Exceptions for "AutoTranslate" folder in "AutoTranslate" target */,
+			);
 			path = AutoTranslate;
 			sourceTree = "<group>";
 		};
@@ -91,6 +104,8 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
+				pl,
 			);
 			mainGroup = 24F4824C2E8FB7A0004383E2;
 			minimizedProjectReferenceProxies = 1;
@@ -184,6 +199,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -240,6 +256,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};
@@ -254,6 +271,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AutoTranslate/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -279,6 +297,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AutoTranslate/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
